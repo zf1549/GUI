@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../src/assets/css/base.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <navbar></navbar>
+      <p>
+        <router-link to="/">切换至com1</router-link>
+        <router-link to="/hash2">切换至com2</router-link>
+      </p>
+      <keep-alive>
+        <router-view />
+      </keep-alive>
+      <tabbar></tabbar>
+    </div>
+    <script src="../src/components/common/navbar/Navbar.js"></script>
+    <script src="../src/components/common/tabbar/Tabbar.js"></script>
+    <script>
+      Vue.use(VueRouter)
+      const com1 = { template: '<div>路由1</div>' }
+      const com2 = { template: '<div>路由2</div>' }
+      const routes = [
+        { path: '/', component: com1 },
+        { path: '/hash2', component: com2 }
+      ]
+      const router = new VueRouter({
+        mode: 'history',
+        routes
+      })
+      var app = new Vue({
+        router,
+        el: '#app',
+        components: {
+          Navbar,
+          Tabbar
+        }
+      })
+    </script>
+  </body>
+
+</html>
